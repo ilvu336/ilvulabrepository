@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AetherisLab</title>
+    <meta name="description" content="Telegram-бот для пошуку IT-вакансій з AI-фільтром">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- ЛР №7: єдиний вхідний ES-модуль (без defer — модулі відкладені за замовчуванням) -->
+    <script type="module" src="js/main.js"></script>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">AetherisLab</div>
+            <nav aria-label="Головна навігація">
+                <a href="#product">Про продукт</a>
+                <a href="#features">Можливості</a>
+                <a href="#vacancies">Вакансії</a>
+                <a href="#advantages">Переваги</a>
+                <a href="#team">Команда</a>
+                <a href="#contact-section">Заявка</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="container">
+            <section id="product" class="hero">
+                <img class="hero-banner" src="image2.png" alt="Логотип AetherisLab — заставка сайту">
+                <h1>AetherisLab — Telegram-бот для пошуку IT-вакансій</h1>
+                <p>
+                    Бот автоматично моніторить українські IT-канали, біржі та джерела вакансій.
+                    Штучний інтелект аналізує кожну пропозицію та фільтрує її за вашим стеком технологій,
+                    досвідом та бажаною заробітною платою.
+                </p>
+                <p>
+                    Результат — список відповідних вакансій прямо у вашому Telegram.
+                    Жодних зайвих сайтів та реєстрацій — все в одному чаті з ботом.
+                </p>
+            </section>
+        </div>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Можливості</h2>
+                <div class="features-grid">
+                    <article class="feature-box">
+                        <h3>Моніторинг каналів</h3>
+                        <p>Бот сканує канали та біржі 24/7 і одразу додає нові вакансії у стрічку.</p>
+                    </article>
+                    <article class="feature-box">
+                        <h3>AI-фільтрація</h3>
+                        <p>Штучний інтелект порівнює ваш стек і досвід з вимогами кожної вакансії.</p>
+                    </article>
+                    <article class="feature-box">
+                        <h3>Генерація листів</h3>
+                        <p>Бот може написати супровідний лист під конкретну вакансію одним натисканням.</p>
+                    </article>
+                    <article class="feature-box">
+                        <h3>Сповіщення</h3>
+                        <p>Нові пропозиції приходять миттєво — ви будете серед перших, хто відреагує.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Етап 4 (ЛР №7): каталог вакансій завантажується з data/items.json через ES-модулі -->
+        <div class="container">
+            <section id="vacancies" class="vacancies" aria-labelledby="vacancies-title">
+                <h2 id="vacancies-title">Каталог вакансій</h2>
+
+                <div class="vacancies-controls">
+                    <div class="control-field">
+                        <label for="vacancy-search">Пошук за назвою або описом</label>
+                        <input type="search" id="vacancy-search" name="vacancy-search"
+                               placeholder="Наприклад: React, Python, Docker..." autocomplete="off">
+                    </div>
+                    <div class="control-field">
+                        <label for="vacancy-category">Категорія</label>
+                        <select id="vacancy-category" name="vacancy-category">
+                            <option value="all" selected>Усі</option>
+                            <option value="backend">Backend</option>
+                            <option value="frontend">Frontend</option>
+                            <option value="qa">QA</option>
+                            <option value="devops">DevOps</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Стани завантаження каталогу (ЛР №7) -->
+                <p id="load-status" role="status"></p>
+                <p id="load-error" role="alert" hidden></p>
+                <button id="retry-load" class="toggle-btn" type="button" hidden>Спробувати ще раз</button>
+
+                <div class="vacancies-meta">
+                    <p id="results-count" role="status" aria-live="polite">Знайдено: 0</p>
+                </div>
+
+                <!-- Контейнер очищається JS і наповнюється динамічно; aria-busy керується JS -->
+                <div class="vacancies-grid" id="item-grid" aria-busy="false"></div>
+
+                <p class="vacancies-empty" id="empty-message" role="status" hidden>
+                    Нічого не знайдено. Спробуйте змінити запит або категорію.
+                </p>
+            </section>
+        </div>
+
+        <!-- Етап 5 (ЛР №8): власні записи користувача — форма + localStorage -->
+        <div class="container">
+            <section id="my-vacancies" class="my-vacancies" aria-labelledby="my-vacancies-title">
+                <h2 id="my-vacancies-title">Мої вакансії</h2>
+
+                <form id="user-item-form" class="user-item-form" novalidate>
+                    <div class="control-field">
+                        <label for="user-title">Назва</label>
+                        <input type="text" id="user-title" name="title"
+                               required minlength="3" maxlength="80"
+                               placeholder=" " autocomplete="off">
+                    </div>
+
+                    <div class="control-field">
+                        <label for="user-category">Категорія</label>
+                        <select id="user-category" name="category" required>
+                            <option value="" selected disabled>Оберіть категорію...</option>
+                            <option value="vacancy">Вакансія</option>
+                            <option value="channel">Канал моніторингу</option>
+                            <option value="note">Нотатка</option>
+                        </select>
+                    </div>
+
+                    <div class="control-field form-full">
+                        <label for="user-description">Опис</label>
+                        <textarea id="user-description" name="description"
+                                  required minlength="10" maxlength="500"
+                                  placeholder=" "></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Додати</button>
+
+                    <p id="user-message" role="status"></p>
+                </form>
+
+                <div id="user-list" class="user-list"></div>
+
+                <p id="user-empty" class="user-empty">Власних записів поки немає.</p>
+            </section>
+        </div>
+
+        <div class="container">
+            <section id="advantages" class="advantages">
+                <h2>Переваги</h2>
+                <ul>
+                    <li><strong>Швидкість</strong> — від першого скану до сповіщення менше 15 секунд.</li>
+                    <li><strong>Без спаму</strong> — AI фільтрує дублікати, вакансії-приманки та застарілі оголошення.</li>
+                </ul>
+
+                <!-- Решта переваг: прихована до натискання кнопки (ЛР №5) -->
+                <ul id="advantages-extra" class="is-hidden">
+                    <li><strong>Зручність</strong> — весь пошук та відгуки відбуваються прямо в Telegram.</li>
+                    <li><strong>Безкоштовно</strong> — ранні користувачі отримують повний доступ без обмежень.</li>
+                </ul>
+
+                <button type="button" class="toggle-btn"
+                        id="advantages-toggle"
+                        aria-expanded="false"
+                        aria-controls="advantages-extra">Показати більше</button>
+            </section>
+        </div>
+
+        <section id="team" class="team">
+            <div class="container">
+                <h2>Команда</h2>
+                <div class="team-card">
+                    <!-- Фото автора поруч із текстом -->
+                    <div class="team-card-inner">
+                        <img class="team-avatar" src="image.png" alt="Фото автора Maksym Nahorodniy">
+                        <div>
+                            <h3>Maksym Nahorodniy</h3>
+                            <p class="role">Розробник / Студент</p>
+                            <p>Студент ФІТ КНУ</p>
+                            <a class="github-link" href="https://github.com/ilvu336" target="_blank" rel="noopener noreferrer">GitHub Профіль</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <section id="contact-section" class="contact">
+                <h2>Заявка на бета-тест</h2>
+                <form class="request-form" id="request-form" action="#" method="post" novalidate>
+
+                    <div>
+                        <label for="name">Ваше ім'я</label>
+                        <input type="text" id="name" name="name" minlength="2" placeholder=" " required>
+                    </div>
+
+                    <div>
+                        <label for="contact">Telegram або Email</label>
+                        <input type="text" id="contact" name="contact" placeholder=" " required>
+                    </div>
+
+                    <div class="form-full">
+                        <label for="stack">Ваш стек</label>
+                        <select id="stack" name="stack" required>
+                            <option value="" selected disabled>Оберіть стек...</option>
+                            <option value="python">Python</option>
+                            <option value="frontend">Frontend</option>
+                            <option value="backend">Backend</option>
+                            <option value="qa">QA</option>
+                            <option value="devops">DevOps</option>
+                            <option value="other">Інше</option>
+                        </select>
+                    </div>
+
+                    <div class="form-full">
+                        <label for="comment">Коментар</label>
+                        <textarea id="comment" name="comment" placeholder="Коротко опишіть, чому хочете приєднатися..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Надіслати заявку</button>
+
+                    <!-- Повідомлення заповнюється через JS -->
+                    <p class="form-status is-hidden" id="form-status" role="status" aria-live="polite"></p>
+
+                </form>
+            </section>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>AetherisLab — Telegram-бот для пошуку IT-вакансій. Лабораторна робота.</p>
+        <p>&copy; 2026 AetherisLab. Всі права захищені.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "title": "Middle Node.js Developer",
+    "category": "backend",
+    "description": "Розробка REST API для фінтех-сервісу: Node.js, PostgreSQL, Docker. Досвід від 2 років.",
+    "image": "images/backend-nodejs.svg"
+  },
+  {
+    "id": 2,
+    "title": "Junior Python Backend Intern",
+    "category": "backend",
+    "description": "Підтримка внутрішніх сервісів на Python та FastAPI, робота з Redis і чергами повідомлень.",
+    "image": "images/backend-python.svg"
+  },
+  {
+    "id": 3,
+    "title": "Frontend Developer (React)",
+    "category": "frontend",
+    "description": "Побудова інтерфейсу SaaS-платформи: React, TypeScript, Redux, адаптивна верстка.",
+    "image": "images/frontend-react.svg"
+  },
+  {
+    "id": 4,
+    "title": "Middle Vue.js Engineer",
+    "category": "frontend",
+    "description": "Розробка SPA для маркетплейсу: Vue 3, Composition API, Vite, інтеграція з REST API.",
+    "image": "images/frontend-vue.svg"
+  },
+  {
+    "id": 5,
+    "title": "QA Automation Engineer",
+    "category": "qa",
+    "description": "Автоматизоване тестування веб-додатків: Playwright, Jest, CI-пайплайни GitLab.",
+    "image": "images/qa-automation.svg"
+  },
+  {
+    "id": 6,
+    "title": "Manual QA Analyst",
+    "category": "qa",
+    "description": "Функціональне та регресивне тестування мобільного застосунку, складання тест-кейсів.",
+    "image": "images/qa-manual.svg"
+  },
+  {
+    "id": 7,
+    "title": "DevOps Engineer (Middle)",
+    "category": "devops",
+    "description": "Підтримка кластерів Kubernetes, налаштування моніторингу Prometheus/Grafana, IaC через Terraform.",
+    "image": "images/devops-kubernetes.svg"
+  },
+  {
+    "id": 8,
+    "title": "Junior CI/CD Engineer",
+    "category": "devops",
+    "description": "Автоматизація збірки та релізів: GitHub Actions, Docker, скрипти Bash, Git.",
+    "image": "images/devops-cicd.svg"
+  },
+  {
+    "id": 9,
+    "title": "Fullstack Developer (PHP + JS)",
+    "category": "backend",
+    "description": "Розробка модулів e-commerce: PHP 8, Laravel, MySQL, трохи Vue для адмін-панелі.",
+    "image": "images/fullstack-php.svg"
+  }
+]

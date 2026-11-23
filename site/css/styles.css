@@ -1,0 +1,353 @@
+
+
+:root {
+    --color-primary: #1a73e8;
+    --color-primary-hover: #1557b0;
+    --color-text: #222222;
+    --color-text-muted: #555555;
+    --color-surface: #ffffff;
+    --color-background: #f9f9f9;
+    --color-border: #dddddd;
+    --radius: 8px;
+    --space: 16px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+}
+
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--space);
+}
+
+
+header {
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space) 0;
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+
+nav {
+    display: flex;
+    gap: var(--space);
+    flex-wrap: wrap;
+}
+
+nav a {
+    font-size: 14px;
+    color: var(--color-text);
+}
+
+nav a:hover {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+
+.hero {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 40px var(--space);
+    margin-top: 30px;
+    text-align: center;
+}
+
+.hero-banner {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius);
+    margin-bottom: var(--space);
+}
+
+.hero h1 {
+    font-size: 24px;
+    margin-bottom: var(--space);
+}
+
+.hero p {
+    font-size: 16px;
+    color: var(--color-text-muted);
+    margin-bottom: 12px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.features {
+    padding: 30px 0;
+}
+
+.features h2 {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space);
+}
+
+.feature-box {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space);
+}
+
+.feature-box h3 {
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.feature-box p {
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+
+.advantages {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 30px var(--space);
+    margin-bottom: 30px;
+}
+
+.advantages h2 {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: var(--space);
+}
+
+.advantages ul {
+    max-width: 500px;
+    margin: 0 auto;
+    font-size: 15px;
+}
+
+.advantages li {
+    margin-bottom: 8px;
+}
+
+
+.team {
+    padding: 0 0 30px 0;
+}
+
+.team h2 {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: var(--space);
+}
+
+.team-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 24px;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+.team-card-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space);
+    text-align: left;
+}
+
+
+.team-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid var(--color-border);
+}
+
+.team-card h3 {
+    font-size: 17px;
+    margin-bottom: 4px;
+}
+
+.team-card .role {
+    font-size: 14px;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+}
+
+.team-card p {
+    font-size: 14px;
+    color: var(--color-text-muted);
+}
+
+.team-card .github-link {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+.contact {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 30px var(--space);
+    margin-bottom: 30px;
+}
+
+.contact h2 {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: var(--space);
+}
+
+
+.request-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+
+.form-full {
+    grid-column: 1 / -1;
+}
+
+
+.request-form label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+
+.request-form input,
+.request-form select,
+.request-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: var(--color-text);
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+}
+
+.request-form input:hover,
+.request-form select:hover,
+.request-form textarea:hover {
+    border-color: var(--color-primary);
+}
+
+
+.request-form input:invalid,
+.request-form select:invalid,
+.request-form textarea:invalid {
+    border-color: #d93025;
+    background-color: #fdf0ef;
+}
+
+
+.request-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+
+.submit-btn {
+    grid-column: 1 / -1;
+    padding: 12px var(--space);
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: var(--color-primary-hover);
+}
+
+
+footer {
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding: var(--space) 0;
+    text-align: center;
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+footer p {
+    margin-bottom: 4px;
+}

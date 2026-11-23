@@ -1,0 +1,729 @@
+
+
+@use 'variables' as *;
+@use 'mixins' as *;
+
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: $font-stack;
+    background-color: $color-background;
+    color: $color-text;
+    line-height: 1.6;
+    // запобігання горизонтальному скролу на вузьких екранах (360px)
+    overflow-x: hidden;
+    min-width: $bp-mobile;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+a {
+    color: $color-primary;
+    text-decoration: none;
+
+    &:hover {
+        color: $color-primary-hover;
+        text-decoration: underline;
+    }
+}
+
+
+a,
+button,
+input,
+select,
+textarea,
+[tabindex] {
+    @include focus-ring;
+}
+
+h1 { font-size: 24px; }
+h2 { font-size: 20px; }
+h3 { font-size: 15px; }
+
+
+.is-hidden {
+    display: none !important;
+}
+
+
+[hidden] {
+    display: none !important;
+}
+
+.visually-hidden {
+    @include visually-hidden;
+}
+
+
+.container {
+    width: 100%;
+    max-width: $container-max;
+    margin: 0 auto;
+    padding: 0 $space-md;
+}
+
+
+header {
+    background-color: $color-surface;
+    border-bottom: 1px solid $color-border;
+    padding: $space-md 0;
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: $space-sm;
+    }
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: $color-text;
+}
+
+nav {
+    display: flex;
+    gap: $space-md;
+    flex-wrap: wrap;
+
+    a {
+        font-size: 14px;
+        color: $color-text;
+        padding: $space-xs $space-sm;
+        border-radius: $radius;
+
+        &:hover {
+            color: $color-primary;
+            text-decoration: none;
+            background-color: rgba($color-primary, 0.08);
+        }
+
+        // активний пункт навігації (керується JS)
+        &.is-active {
+            color: $color-surface;
+            background-color: $color-primary;
+        }
+    }
+}
+
+
+.hero {
+    @include card;
+    padding: 40px $space-md;
+    margin-top: $space-xl;
+    text-align: center;
+}
+
+.hero-banner {
+    width: 100%;
+    display: block;
+    border-radius: $radius;
+    margin-bottom: $space-md;
+}
+
+.hero h1 {
+    font-size: 24px;
+    margin-bottom: $space-md;
+}
+
+.hero p {
+    font-size: 16px;
+    color: $color-text-muted;
+    margin-bottom: $space-sm;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.features {
+    padding: $space-xl 0;
+
+    h2 {
+        @include section-title;
+    }
+}
+
+
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-md;
+}
+
+.feature-box {
+    @include card;
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+
+    h3 {
+        font-size: 15px;
+    }
+
+    p {
+        font-size: 13px;
+        color: $color-text-muted;
+    }
+}
+
+
+.favorite-btn {
+    align-self: flex-start;
+    margin-top: auto;
+    padding: $space-sm $space-md;
+    font-family: $font-stack;
+    font-size: 13px;
+    font-weight: bold;
+    color: $color-primary;
+    background-color: $color-surface;
+    border: 1px solid $color-primary;
+    border-radius: $radius;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba($color-primary, 0.08);
+    }
+
+    // активний стан: «в обраному»
+    &.is-active {
+        color: $color-surface;
+        background-color: $color-primary;
+
+        &:hover {
+            background-color: $color-primary-hover;
+        }
+    }
+}
+
+
+.vacancies {
+    padding: 0 0 $space-xl;
+
+    h2 {
+        @include section-title;
+    }
+}
+
+.vacancies-controls {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-md;
+    margin-bottom: $space-md;
+    align-items: end;
+}
+
+.control-field {
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+    min-width: 0;
+
+    label {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 10px 12px;
+        font-family: $font-stack;
+        font-size: 14px;
+        color: $color-text;
+        background-color: $color-surface;
+        border: 1px solid $color-border;
+        border-radius: $radius;
+
+        &:hover {
+            border-color: $color-primary;
+        }
+    }
+}
+
+.vacancies-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-sm;
+    margin-bottom: $space-md;
+    font-size: 14px;
+    color: $color-text-muted;
+}
+
+// MOBILE-FIRST: 1 колонка (360px)
+.vacancies-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-md;
+}
+
+.vacancy-card {
+    @include card;
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+    background-color: $color-surface;
+
+    img {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+        border-radius: $radius;
+    }
+
+    .vacancy-category {
+        align-self: flex-start;
+        padding: 2px 10px;
+        font-size: 12px;
+        font-weight: bold;
+        color: $color-primary;
+        background-color: rgba($color-primary, 0.1);
+        border-radius: 999px;
+    }
+
+    h3 {
+        font-size: 16px;
+    }
+
+    p {
+        font-size: 14px;
+        color: $color-text-muted;
+    }
+
+    .favorite-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+.vacancies-empty {
+    @include card;
+    text-align: center;
+    color: $color-danger;
+    font-weight: bold;
+}
+
+
+#load-status {
+    font-size: 14px;
+    color: $color-text-muted;
+    text-align: center;
+    margin-bottom: $space-sm;
+
+    &:empty {
+        display: none;
+    }
+}
+
+#load-error {
+    @include card;
+    text-align: center;
+    color: $color-danger;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+#retry-load {
+    display: block;
+    margin: 0 auto $space-md;
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+
+.my-vacancies {
+    padding: 0 0 $space-xl;
+
+    h2 {
+        @include section-title;
+    }
+}
+
+.user-item-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-md;
+    max-width: 600px;
+    margin: 0 auto $space-md;
+
+    label {
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 10px 12px;
+        font-family: $font-stack;
+        font-size: 14px;
+        color: $color-text;
+        background-color: $color-surface;
+        border: 1px solid $color-border;
+        border-radius: $radius;
+
+        &:hover {
+            border-color: $color-primary;
+        }
+    }
+
+    textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+}
+
+#user-message {
+    grid-column: 1 / -1;
+    padding: $space-sm $space-md;
+    font-size: 14px;
+    font-weight: bold;
+    color: $color-success;
+    background-color: rgba($color-success, 0.1);
+    border: 1px solid rgba($color-success, 0.4);
+    border-radius: $radius;
+
+    &:empty {
+        display: none;
+    }
+}
+
+
+.user-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-md;
+}
+
+.user-item-card {
+    @include card;
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+
+    h3 {
+        font-size: 16px;
+    }
+
+    p {
+        font-size: 14px;
+        color: $color-text-muted;
+    }
+
+    .user-item-category {
+        align-self: flex-start;
+        padding: 2px 10px;
+        font-size: 12px;
+        font-weight: bold;
+        color: $color-primary;
+        background-color: rgba($color-primary, 0.1);
+        border-radius: 999px;
+    }
+
+    .delete-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.delete-btn {
+    align-self: flex-start;
+    margin-top: auto;
+    padding: $space-sm $space-md;
+    font-family: $font-stack;
+    font-size: 13px;
+    font-weight: bold;
+    color: $color-danger;
+    background-color: $color-surface;
+    border: 1px solid $color-danger;
+    border-radius: $radius;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba($color-danger, 0.08);
+    }
+}
+
+.user-empty {
+    @include card;
+    text-align: center;
+    color: $color-text-muted;
+}
+
+
+.advantages {
+    @include card;
+    padding: $space-xl $space-md;
+    margin-bottom: $space-xl;
+
+    h2 {
+        @include section-title;
+    }
+
+    ul {
+        max-width: 500px;
+        margin: 0 auto;
+        font-size: 15px;
+    }
+
+    li {
+        margin-bottom: $space-sm;
+    }
+}
+
+.toggle-btn {
+    display: block;
+    margin: $space-md auto 0;
+    padding: $space-sm $space-lg;
+    font-family: $font-stack;
+    font-size: 14px;
+    font-weight: bold;
+    color: $color-surface;
+    background-color: $color-primary;
+    border: none;
+    border-radius: $radius;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $color-primary-hover;
+    }
+}
+
+
+.team {
+    padding: 0 0 $space-xl;
+
+    h2 {
+        @include section-title;
+    }
+}
+
+.team-card {
+    @include card;
+    padding: $space-lg;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.team-card-inner {
+    display: flex;
+    align-items: center;
+    gap: $space-md;
+    text-align: left;
+    flex-wrap: wrap;
+}
+
+.team-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid $color-border;
+}
+
+.team-card h3 {
+    font-size: 17px;
+    margin-bottom: $space-xs;
+}
+
+.team-card .role {
+    font-size: 14px;
+    color: $color-primary;
+    margin-bottom: $space-sm;
+}
+
+.team-card p {
+    font-size: 14px;
+    color: $color-text-muted;
+}
+
+.team-card .github-link {
+    display: inline-block;
+    margin-top: $space-sm;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+.contact {
+    @include card;
+    padding: $space-xl $space-md;
+    margin-bottom: $space-xl;
+
+    h2 {
+        @include section-title;
+    }
+}
+
+
+.request-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-md;
+    max-width: 600px;
+    margin: 0 auto;
+
+    label {
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 10px 12px;
+        font-family: $font-stack;
+        font-size: 14px;
+        color: $color-text;
+        background-color: $color-background;
+        border: 1px solid $color-border;
+        border-radius: $radius;
+
+        &:hover {
+            border-color: $color-primary;
+        }
+
+        &:invalid:not(:placeholder-shown) {
+            border-color: $color-danger;
+            background-color: #fdf0ef;
+        }
+    }
+
+    textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+}
+
+.form-full {
+    grid-column: 1 / -1;
+}
+
+.submit-btn {
+    grid-column: 1 / -1;
+    padding: 12px $space-md;
+    font-family: $font-stack;
+    font-size: 15px;
+    font-weight: bold;
+    color: $color-surface;
+    background-color: $color-primary;
+    border: none;
+    border-radius: $radius;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $color-primary-hover;
+    }
+}
+
+
+.form-status {
+    grid-column: 1 / -1;
+    padding: $space-sm $space-md;
+    font-size: 14px;
+    font-weight: bold;
+    color: $color-success;
+    background-color: rgba($color-success, 0.1);
+    border: 1px solid rgba($color-success, 0.4);
+    border-radius: $radius;
+}
+
+
+footer {
+    background-color: $color-surface;
+    border-top: 1px solid $color-border;
+    padding: $space-md 0;
+    text-align: center;
+    font-size: 13px;
+    color: $color-text-muted;
+
+    p {
+        margin-bottom: $space-xs;
+    }
+}
+
+
+
+// --- Планшет: від 768px → 2 колонки ---
+@include respond-from($bp-tablet) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .vacancies-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .user-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .vacancies-controls {
+        grid-template-columns: 2fr 1fr;
+    }
+
+    .user-item-form {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .request-form {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .feature-box h3 { font-size: 16px; }
+    .feature-box p { font-size: 14px; }
+}
+
+
+@include respond-from($bp-desktop) {
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .vacancies-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .user-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+}
